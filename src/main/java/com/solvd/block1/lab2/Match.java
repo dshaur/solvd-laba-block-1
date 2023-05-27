@@ -9,6 +9,7 @@ package com.solvd.block1.lab2;
 
 import com.solvd.block1.lab2.collections.LinkedList;
 import com.solvd.block1.lab2.exceptions.MissingParameterException;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,19 +30,19 @@ class Match {
     private static final Score SCORE = new Score();
     private static final Random RANDOM = new Random();
 
-    /* This is the constructor of the Match class which is used to initialize the fields homePlayers, awayPlayers, referee
-    and stadium with the values specified in the parameters. */
-    public Match(Team HOME_TEAM, Team AWAY_TEAM, Stadium stadium, LinkedList<Referee> referees) {
-        this.HOME_TEAM = HOME_TEAM;
-        this.AWAY_TEAM = AWAY_TEAM;
-        this.stadium = stadium;
-        this.referees = referees;
+    // Constructor
+    public Match(Team homeTeam, Team awayTeam, Stadium stadium, LinkedList<Referee> referees) {
 
-        if (HOME_TEAM == null || AWAY_TEAM == null ||
-                stadium == null || referees == null) {
+        // The code checks if any of the required parameters (homeTeam, awayTeam, stadium, referees) are null using
+        // the ObjectUtils.anyNull() method. If any parameter is null, a MissingParameterException is thrown.
+        if (ObjectUtils.anyNull(homeTeam, awayTeam, stadium, referees)) {
             throw new MissingParameterException("One or more required parameters are missing.");
         }
 
+        this.HOME_TEAM = homeTeam;
+        this.AWAY_TEAM = awayTeam;
+        this.stadium = stadium;
+        this.referees = referees;
     }
 
     // Setters and Getters from hw2 practice

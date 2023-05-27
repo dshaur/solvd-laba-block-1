@@ -10,10 +10,9 @@ package com.solvd.block1.lab2;
 import com.solvd.block1.lab2.exceptions.CoachNotFoundException;
 import com.solvd.block1.lab2.interfaces.Cheerable;
 import com.solvd.block1.lab2.interfaces.Coachable;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.Objects;
 
 
 class Coach extends Person implements Coachable, Cheerable {
@@ -22,15 +21,13 @@ class Coach extends Person implements Coachable, Cheerable {
     private static final Logger LOGGER = LogManager.getLogger(Coach.class);
 
     // Constructor
-    Coach(String name, int age) throws CoachNotFoundException {
-
+    public Coach(String name, int age) throws CoachNotFoundException {
         super(name, age);
 
-        // Check if the home Coach or away Coach is empty
-        if (Objects.equals(this.getName(), "")) {
-
+        // This code checks whether the "name" string is empty using the StringUtils class method "isEmpty".
+        // If it is empty, it throws a CoachNotFoundException.
+        if (StringUtils.isEmpty(name)) {
             throw new CoachNotFoundException("Home coach or away coach name not found.");
-
         }
     }
 
